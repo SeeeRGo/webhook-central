@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     
   // }
   console.log('request', {
-    Name, Email, Name_2, Input, data
+    Name, Email, Name_2, Input, data, $_POST
   });
   
   return NextResponse.json(
