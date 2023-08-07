@@ -24,7 +24,12 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   // Add output webhook here
-  const body = await request.json()
+  try {
+    const body = await request.json()
+  } catch (e) {
+    console.log('error', e);
+    
+  }
   console.log('request', {
     body,
     path: request.nextUrl.pathname,
@@ -34,7 +39,7 @@ export async function POST(request: NextRequest) {
   
   return NextResponse.json(
     {
-      body: request.body,
+      // body,
       path: request.nextUrl.pathname,
       query: request.nextUrl.search,
       cookies: request.cookies.getAll(),
