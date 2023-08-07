@@ -34,10 +34,12 @@ export function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const data = await request.formData()
   const {Name, Email, Name_2, Input} = Object.fromEntries(data)
+  const body = { name: Name, email: Email, city: Name_2, resume_link: Input}
+  console.log('body', body);
   
   return NextResponse.json(
     {
-      body: { name: Name, email: Email, city: Name_2, resume_link: Input},
+      body,
       path: request.nextUrl.pathname,
       query: request.nextUrl.search,
       cookies: request.cookies.getAll(),
