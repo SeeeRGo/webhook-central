@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 export function GET(request: NextRequest) {
   // Add output webhook here
+  console.log('request', {
+    body: request.body,
+    path: request.nextUrl.pathname,
+    query: request.nextUrl.search,
+    cookies: request.cookies.getAll(),
+  });
+  
   return NextResponse.json(
     {
       body: request.body,
