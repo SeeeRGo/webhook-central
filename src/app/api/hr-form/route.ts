@@ -35,13 +35,14 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
   const data = await request.formData()
+  console.log('data', data);
+  
 
   //return the data back or just do whatever you want with it
-  res.status(200).json({
-    status: 'ok',
-    data
-  })
-}
+  // res.json({
+  //   status: 'ok',
+  //   data
+  // })
   // Add output webhook here
 
   // const {Name, Email, Name_2, Input, data, $_POST} = request.body
@@ -54,15 +55,15 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
   //   Name, Email, Name_2, Input, data, $_POST
   // });
   
-  // return NextResponse.json(
-  //   {
-  //     // body,
-  //     path: request.nextUrl.pathname,
-  //     query: request.nextUrl.search,
-  //     cookies: request.cookies.getAll(),
-  //   },
-  //   {
-  //     status: 200,
-  //   },
-  // );
-// }
+  return NextResponse.json(
+    {
+      // body,
+      path: request.nextUrl.pathname,
+      query: request.nextUrl.search,
+      cookies: request.cookies.getAll(),
+    },
+    {
+      status: 200,
+    },
+  );
+}
