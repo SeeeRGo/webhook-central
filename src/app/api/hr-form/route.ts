@@ -24,17 +24,15 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   // Add output webhook here
-  try {
-    const body = await request.json()
-  } catch (e) {
-    console.log('error', e);
+  // @ts-ignore
+  const {Name, Email, Name_2, Input} = request.body
+  // try {
+  // } catch (e) {
+  //   console.log('error', e);
     
-  }
+  // }
   console.log('request', {
-    body: request.body,
-    path: request.nextUrl.pathname,
-    query: request.nextUrl.search,
-    cookies: request.cookies.getAll(),
+    Name, Email, Name_2, Input,
   });
   
   return NextResponse.json(
