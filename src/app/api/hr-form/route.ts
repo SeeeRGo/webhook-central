@@ -33,7 +33,8 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const data = await request.formData()
-  console.log('data', data);
+  const body = Object.fromEntries(data)
+  console.log('body', body);
   
 
   //return the data back or just do whatever you want with it
