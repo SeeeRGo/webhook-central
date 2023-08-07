@@ -33,30 +33,11 @@ export function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const data = await request.formData()
-  const body = Object.fromEntries(data)
-  console.log('body', body);
-  
-
-  //return the data back or just do whatever you want with it
-  // res.json({
-  //   status: 'ok',
-  //   data
-  // })
-  // Add output webhook here
-
-  // const {Name, Email, Name_2, Input, data, $_POST} = request.body
-  // try {
-  // } catch (e) {
-  //   console.log('error', e);
-    
-  // }
-  // console.log('request', {
-  //   Name, Email, Name_2, Input, data, $_POST
-  // });
+  const {Name, Email, Name_2, Input} = Object.fromEntries(data)
   
   return NextResponse.json(
     {
-      // body,
+      body: { name: Name, email: Email, city: Name_2, resume_link: Input},
       path: request.nextUrl.pathname,
       query: request.nextUrl.search,
       cookies: request.cookies.getAll(),
