@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 // @ts-ignore
-import { Formidable } from "formidable";
 import { NextApiResponse } from 'next';
 
 // //set bodyparser
