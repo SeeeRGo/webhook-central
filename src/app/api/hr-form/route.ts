@@ -25,7 +25,7 @@ export function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   // Add output webhook here
   // @ts-ignore
-  const {Name, Email, Name_2, Input, data} = request.body
+  const {Name, Email, Name_2, Input, data, $_POST} = request.body
   // try {
   // } catch (e) {
   //   console.log('error', e);
