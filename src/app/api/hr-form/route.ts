@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+// @ts-ignore
 import { Formidable } from "formidable";
 import { NextApiResponse } from 'next';
 
-//set bodyparser
-export const config = {
-  api: {
-    bodyParser: false
-  }
-}
+// //set bodyparser
+// export const config = {
+//   runtime: 'edge',
+//   api: {
+//     bodyParser: false
+//   }
+// }
 
 export function GET(request: NextRequest) {
   // Add output webhook here
@@ -33,17 +35,7 @@ export function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest, res: NextApiResponse) {
-  const data = await new Promise((resolve, reject) => {
-    const form = new Formidable();
-
-    // @ts-ignore
-    form.parse(request, (err, fields, files) => {
-      if (err) reject({ err })
-      console.log('fields', fields);
-      
-      resolve({ err, fields, files })
-    }) 
-  })
+  const data = await request.formData()
 
   //return the data back or just do whatever you want with it
   res.status(200).json({
@@ -74,4 +66,4 @@ export async function POST(request: NextRequest, res: NextApiResponse) {
   //     status: 200,
   //   },
   // );
-}
+// }
