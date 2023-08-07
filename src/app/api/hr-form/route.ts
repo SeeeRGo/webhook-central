@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// @ts-ignore
-import { NextApiResponse } from 'next';
 
 // //set bodyparser
 // export const config = {
@@ -33,7 +31,7 @@ export function GET(request: NextRequest) {
   );
 }
 
-export async function POST(request: NextRequest, res: NextApiResponse) {
+export async function POST(request: NextRequest) {
   const data = await request.formData()
   console.log('data', data);
   
