@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     
   }
   console.log('request', {
-    body,
+    body: request.body,
     path: request.nextUrl.pathname,
     query: request.nextUrl.search,
     cookies: request.cookies.getAll(),
