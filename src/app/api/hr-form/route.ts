@@ -22,10 +22,11 @@ export function GET(request: NextRequest) {
   );
 }
 
-export function POST(request: NextRequest) {
+export async function POST(request: NextRequest) {
   // Add output webhook here
+  const body = await request.json()
   console.log('request', {
-    body: request.body,
+    body,
     path: request.nextUrl.pathname,
     query: request.nextUrl.search,
     cookies: request.cookies.getAll(),
