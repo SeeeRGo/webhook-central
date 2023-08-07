@@ -25,14 +25,14 @@ export function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   // Add output webhook here
   // @ts-ignore
-  const {Name, Email, Name_2, Input} = request.body
+  const {Name, Email, Name_2, Input, data} = request.body
   // try {
   // } catch (e) {
   //   console.log('error', e);
     
   // }
   console.log('request', {
-    Name, Email, Name_2, Input,
+    Name, Email, Name_2, Input, data
   });
   
   return NextResponse.json(
