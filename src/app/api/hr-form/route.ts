@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 export function GET(request: NextRequest) {
+  // Add output webhook here
   return NextResponse.json(
     {
       body: request.body,
