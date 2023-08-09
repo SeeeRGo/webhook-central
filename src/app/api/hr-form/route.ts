@@ -27,15 +27,20 @@ export async function POST(request: NextRequest) {
       }
     ],
   }
+  try {
+    await fetch("https://api.huntflow.ru/v2/accounts/170849/applicants", {
+      "headers": {
+        "authorization": "Bearer 814d6054241c75581dca8a3fed0317b66a79349fadba3b49be42f250d883354d",
+        "content-type": "application/json",
+      },
+      "body": JSON.stringify(hunfFlowBody),
+      "method": "POST"
+    });
+  } catch (e) {
+    console.log('error', e);
+    
+  }
 
-  await fetch("https://api.huntflow.ru/v2/accounts/170849/applicants", {
-    "headers": {
-      "authorization": "Bearer 814d6054241c75581dca8a3fed0317b66a79349fadba3b49be42f250d883354d",
-      "content-type": "application/json",
-    },
-    "body": JSON.stringify(hunfFlowBody),
-    "method": "POST"
-  });
   return NextResponse.json(
     {
       result: 'OK',
