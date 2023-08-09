@@ -6,18 +6,18 @@ export async function POST(request: NextRequest) {
   console.log('data', data);
   
   const {Name, Email, Name_2, Input} = Object.fromEntries(data)
-  const body = { first_name: Name.toString(), email: Email, city: Name_2, resume_link: Input}
+  const body = { first_name: Name.toString(), last_name: Name.toString().split(' ')[1] ?? '' , email: Email, city: Name_2, resume_link: Input}
 
   const hunfFlowBody = {
     "first_name": body.first_name,
-    "last_name": "",
+    "last_name": body.last_name,
     "money": "",
     "phone": "",
     "email": body.email,
     "skype": "",
     "position": "",
     "company": "",
-    "birthday": "",
+    "birthday": "1000-01-01",
     "externals": [
       {
         "auth_type": "NATIVE",
