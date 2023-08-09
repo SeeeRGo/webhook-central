@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     "skype": "",
     "position": "",
     "company": "",
-    "birthday": "1000-01-01",
+    "birthday": "1900-01-01",
     "externals": [
       {
         "auth_type": "NATIVE",
