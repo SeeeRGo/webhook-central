@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     ],
   }
   try {
-    await fetch("https://api.huntflow.ru/v2/accounts/170849/applicants", {
+    const result = await fetch("https://api.huntflow.ru/v2/accounts/170849/applicants", {
       "headers": {
         "authorization": "Bearer 814d6054241c75581dca8a3fed0317b66a79349fadba3b49be42f250d883354d",
         "content-type": "application/json",
@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
       "body": JSON.stringify(hunfFlowBody),
       "method": "POST"
     });
+    const parsed = await result.json()
+    console.log('parsed', parsed);
   } catch (e) {
     console.log('error', e);
     
