@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const orgId = '170849'
-const accessToken = 'f913b7334084292be41a23c709ea3ddbbcd4a55d231bafa596ea0d1b18769129'
+const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN
 export async function POST(request: NextRequest) {
   const data = await request.formData()
 
