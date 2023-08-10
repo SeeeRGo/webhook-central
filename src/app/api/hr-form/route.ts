@@ -32,18 +32,18 @@ export async function POST(request: NextRequest) {
       }
     ],
   }
-  try {
-    await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
-      "headers": {
-        "authorization": `Bearer ${access_token}`,
-        "content-type": "application/json",
-      },
-      "body": JSON.stringify(hunfFlowBody),
-      "method": "POST"
-    });
-  } catch (e) {
-    console.log('error', e);
-  }
+  // try {
+  //   await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
+  //     "headers": {
+  //       "authorization": `Bearer ${access_token}`,
+  //       "content-type": "application/json",
+  //     },
+  //     "body": JSON.stringify(hunfFlowBody),
+  //     "method": "POST"
+  //   });
+  // } catch (e) {
+  //   console.log('error', e);
+  // }
 
   return NextResponse.json(
     {
