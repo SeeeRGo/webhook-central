@@ -4,9 +4,11 @@ import type { NextRequest } from 'next/server';
 
 const orgId = '170849'
 export async function POST(request: NextRequest) {
+  const headers = request.headers
   const data = await request.formData()
 
   console.log('data', data);
+  console.log('headers', headers);
   const access_token = await getActiveAccessToken()
   
   const {Name, Email, Name_2, Input, Специализация} = Object.fromEntries(data)
