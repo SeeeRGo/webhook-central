@@ -11,8 +11,8 @@ export async function POST(request: NextRequest) {
   console.log('headers', headers);
   const access_token = await getActiveAccessToken()
   
-  const {Name, Email, Name_2, Input, Специализация} = Object.fromEntries(data)
-  const body = { first_name: Name.toString().split(' ')[0], last_name: Name.toString().split(' ')[1] ?? '' , middle_name: Name.toString().split(' ')[2] ?? '', email: Email, city: Name_2, resume_link: Input}
+  const {Name, Email, Name_2, Input, ...rest} = Object.fromEntries(data)
+  const body = { first_name: Name.toString().split(' ')[0], last_name: Name.toString().split(' ')[1] ?? '' , middle_name: Name.toString().split(' ')[2] ?? '', email: Email, city: Name_2, resume_link: Input, position: rest['Специализация'] ?? ''}
   const hunfFlowBody = {
     "first_name": body.first_name,
     "last_name": body.last_name,
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
     "phone": "",
     "email": body.email,
     "skype": "",
-    "position": Специализация ?? '',
+    "position": body.position,
     "company": "",
     "externals": [
       {
