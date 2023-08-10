@@ -13,7 +13,12 @@ export async function getActiveAccessToken() {
       },
       "body": JSON.stringify({ refresh_token }),
       "method": "POST"
-    }).then(res => res.json())
+    })
+    .then(res => res.json())
+    .then(data => JSON.parse(data))
+  console.log('result tokens', result);
+  
+  
   await kv.set(hrFormAccessKey, result.access_token || null)
   await kv.set(hrFormRefreshKey, result.refresh_token  || null)
   return result.access_token
