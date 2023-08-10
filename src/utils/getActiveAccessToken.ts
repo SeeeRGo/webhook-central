@@ -14,7 +14,7 @@ export async function getActiveAccessToken() {
       "body": JSON.stringify({ refresh_token }),
       "method": "POST"
     })
-    .then(res => res.json())
+    .then(res => res.text())
     .then(data => JSON.parse(data))
   console.log('result tokens', result);
   
