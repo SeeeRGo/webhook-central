@@ -1,12 +1,12 @@
-import { getActiveAccessToken } from '@/utils/getActiveAccessToken';
+// import { getNewAccessToken } from '@/utils/getNewAccessToken';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const token = await getActiveAccessToken()
+  // const token = await getNewAccessToken()
 
   return NextResponse.json(
     {
-      result: token,
+      result: 'token',
     },
     {
       status: 200,

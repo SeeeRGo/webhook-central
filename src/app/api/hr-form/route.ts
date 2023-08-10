@@ -1,11 +1,12 @@
-import { getActiveAccessToken } from '@/utils/getActiveAccessToken';
+import { hrFormAccessKey, orgId } from '@/constants';
+import { getNewAccessToken } from '@/utils/getNewAccessToken';
 import { parseReferer } from '@/utils/parseReferer';
+import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const orgId = '170849'
-const accessToken = process.env.NEXT_PUBLIC_ACCESS_TOKEN
 export async function POST(request: NextRequest) {
+  const accessToken = await kv.get<string>(hrFormAccessKey);
   const data = await request.formData()
 
   console.log('data', data);
@@ -44,6 +45,22 @@ export async function POST(request: NextRequest) {
       "body": JSON.stringify(hunfFlowBody),
       "method": "POST"
     }).then(res => res.json())
+
+    if('errors' in result) {
+      const tokenExpired = result.errors.some(({ detail, type }: any) => type === "authorization_error" && detail === "token_expired")
+      if(tokenExpired) {
+        const newToken = await getNewAccessToken()
+        const newResult = await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
+          "headers": {
+            "authorization": `Bearer ${newToken}`,
+            "content-type": "application/json",
+          },
+          "body": JSON.stringify(hunfFlowBody),
+          "method": "POST"
+        }).then(res => res.json())
+        console.log('newResult', newResult);
+      }
+    }
     console.log('result', result);
   } catch (e) {
     console.log('error', e);
