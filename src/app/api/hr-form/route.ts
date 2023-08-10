@@ -4,11 +4,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const orgId = '170849'
+const accessToken = 'f913b7334084292be41a23c709ea3ddbbcd4a55d231bafa596ea0d1b18769129'
 export async function POST(request: NextRequest) {
   const data = await request.formData()
 
   console.log('data', data);
-  const access_token = await getActiveAccessToken()
+  // const access_token = await getActiveAccessToken()
   const {Name, Email, Name_2, Input, ...rest} = Object.fromEntries(data)
   // @ts-ignore
   const position = rest['Специализация'] ?? parseReferer(request.headers.referer as string)
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
   try {
     const result = await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
       "headers": {
-        "authorization": `Bearer ${access_token}`,
+        "authorization": `Bearer ${accessToken}`,
         "content-type": "application/json",
       },
       "body": JSON.stringify(hunfFlowBody),
