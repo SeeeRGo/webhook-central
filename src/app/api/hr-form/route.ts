@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
   const {Name, Email, Name_2, Input, ...rest} = Object.fromEntries(data)
   // @ts-ignore
   const position = rest['Специализация'] ?? parseReferer(request.headers.referer as string)
+  console.log('position', position);
+  
   const body = { first_name: Name.toString().split(' ')[0], last_name: Name.toString().split(' ')[1] ?? '' , middle_name: Name.toString().split(' ')[2] ?? '', email: Email, city: Name_2, resume_link: Input, position }
   const hunfFlowBody = {
     "first_name": body.first_name,
@@ -33,14 +35,15 @@ export async function POST(request: NextRequest) {
     ],
   }
   try {
-    await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
+    const result = await fetch(`https://api.huntflow.ru/v2/accounts/${orgId}/applicants`, {
       "headers": {
         "authorization": `Bearer ${access_token}`,
         "content-type": "application/json",
       },
       "body": JSON.stringify(hunfFlowBody),
       "method": "POST"
-    });
+    }).then(res => res.json())
+    console.log('result', result);
   } catch (e) {
     console.log('error', e);
   }
