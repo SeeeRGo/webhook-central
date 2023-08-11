@@ -1,8 +1,8 @@
-// import { getNewAccessToken } from '@/utils/getNewAccessToken';
+import { getNewAccessToken } from '@/utils/getNewAccessToken';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  // const token = await getNewAccessToken()
+  await getNewAccessToken()
 
   return NextResponse.json(
     {

@@ -1,11 +1,13 @@
 import { hrFormAccessKey, hrFormRefreshKey } from "@/constants";
 import { kv } from "@vercel/kv";
 
-
+function hasTokens(value: any): value is {access_token: string, refresh_token: string } {
+  return !!value.access_token && !!value.refresh_token
+}
 
 export async function getNewAccessToken() {
   const refresh_token = await kv.get<string>(hrFormRefreshKey);
-  const result: {access_token: string, refresh_token: string } = await fetch("https://api.huntflow.ru/v2/token/refresh", {
+  const result = await fetch("https://api.huntflow.ru/v2/token/refresh", {
       "headers": {
         "content-type": "application/json",
       },
@@ -13,10 +15,8 @@ export async function getNewAccessToken() {
       "method": "POST"
     })
     .then(res => res.json())
-  console.log('result tokens', result);
-  
-  
-  await kv.set(hrFormAccessKey, result.access_token || null)
-  await kv.set(hrFormRefreshKey, result.refresh_token  || null)
-  return result.access_token
+  if (hasTokens(result)) {
+    await kv.set(hrFormAccessKey, result.access_token)
+    await kv.set(hrFormRefreshKey, result.refresh_token)
+  } 
 }
