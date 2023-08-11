@@ -1,6 +1,6 @@
 import { hrFormAccessKey, orgId } from '@/constants';
 import { getNewAccessToken } from '@/utils/getNewAccessToken';
-import { parseReferer } from '@/utils/parseReferer';
+import { parseSource } from '@/utils/parseReferer';
 import { kv } from '@vercel/kv';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -8,12 +8,13 @@ import type { NextRequest } from 'next/server';
 export async function POST(request: NextRequest) {
   const accessToken = await kv.get<string>(hrFormAccessKey);
   const data = await request.formData()
-
+//  form571202343 devops
+//  form610251561 it-recruiter
   console.log('data', data);
   // const access_token = await getActiveAccessToken()
-  const {Name, Email, Name_2, Input, ...rest} = Object.fromEntries(data)
+  const {Name, Email, Name_2, Input, formid, ...rest} = Object.fromEntries(data)
   // @ts-ignore
-  const position = rest['Специализация'] ?? parseReferer(request.headers.referer as string)
+  const position = rest['Специализация'] ?? parseSource(formid)
   console.log('position', position);
   
   const body = { first_name: Name.toString().split(' ')[0], last_name: Name.toString().split(' ')[1] ?? '' , middle_name: Name.toString().split(' ')[2] ?? '', email: Email, city: Name_2, resume_link: Input, position }
